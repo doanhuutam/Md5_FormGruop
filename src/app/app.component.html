@@ -1,0 +1,7 @@
+<app-home [products]="product">
+</app-home>
+<app-product [products]="product"
+             (deletePr)="delete($event)"
+              (createPr)="create($event)"
+              (editPr)="edit($event)">
+</app-product>
