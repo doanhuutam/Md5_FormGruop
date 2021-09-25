@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../model/product";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -11,7 +11,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class ProductComponent implements OnInit {
   @Input()
   products: Product[] = [];
-  formProduct: FormGroup=new FormGroup({});
+  formProduct: FormGroup = new FormGroup({});
 
   constructor() {
 
@@ -19,10 +19,13 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.formProduct = new FormGroup({
-      name: new FormControl(),
-      price: new FormControl(),
-      img: new FormControl(),
-      trangthai: new FormControl()
+      name: new FormControl('', Validators.required),
+      //validation name khoong de trong
+      price: new FormControl('', Validators.min(9)),
+      //validation name gia tri nho nhat la 9
+      img: new FormControl('', Validators.required),
+      //validation name khoong de trong
+      trangthai: new FormControl('',Validators.required)
     });
 
   }
@@ -82,15 +85,16 @@ export class ProductComponent implements OnInit {
     this.formProduct.reset();
 
 
-
   }
 
   checkStatus() {
     // @ts-ignore
-    if (this.formProduct?.get('trangthai')=== 'true') {
+    if (this.formProduct?.get('trangthai') === 'true') {
       return true;
     } else {
       return false;
     }
   }
+
 }
+

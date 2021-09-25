@@ -53,23 +53,30 @@
       <form [formGroup]="formProduct">
         <div class="modal-body">
           nhập tên:<input placeholder="nhập tên " formControlName="name">
+          <p *ngIf="formProduct.get('name')?.valid && formProduct.get('name')?.touched" >không được để trống</p>
           <br>
           nhập giá :<input placeholder="nhập giá " formControlName="price">
+          <p *ngIf="formProduct.get('price')?.valid && formProduct.get('price')?.touched" >giá phải lớn hơn 9</p>
+
           <br>
           hình ảnh :<input placeholder="chọn hình ảnh" formControlName="img">
+          <p *ngIf="formProduct.get('img')?.valid && formProduct.get('img')?.touched" >không được để trống</p>
+
           <br>
 
           nhập trạng thái :
           <select formControlName="trangthai">
-        <option value="true">Còn hàng</option>
-        <option value="false">Hết hàng</option>
-        </select>
+            <option value="true">Còn hàng</option>
+            <option value="false">Hết hàng</option>
+          </select>
+          <p *ngIf="formProduct.get('trangthai')?.valid && formProduct.get('trangthai')?.touched" >không được để trống</p>
+
         </div>
       </form>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button (click)="create()" type="button" class="btn btn-dark">Create</button>
+        <button (click)="create()" type="button" class="btn btn-dark" [disabled]="formProduct.invalid">Create</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       </div>
 
